@@ -10,18 +10,18 @@
     const d = Number(p.discount);
 
     if (p.discountType === "mrp" && Number.isFinite(mrp) && d > 0) {
-      return { finalPrice: Math.round(mrp * (1 - d / 100)), basePrice: mrp, discounted: true, label: `${d}% OFF MRP` };
+      return { finalPrice: Math.round(mrp * (1 - d / 100)), basePrice: mrp, discounted: true, label: `${d}% OFF` };
     }
     if (p.discountType === "sp" && Number.isFinite(sp) && d > 0) {
-      return { finalPrice: Math.round(sp * (1 - d / 100)), basePrice: sp, discounted: true, label: `${d}% OFF SP` };
+      return { finalPrice: Math.round(sp * (1 - d / 100)), basePrice: sp, discounted: true, label: `${d}% OFF` };
     }
     return { finalPrice: Number.isFinite(sp) ? sp : (Number.isFinite(mrp) ? mrp : null), basePrice: null, discounted: false, label: "" };
   }
 
   function whatsapp(p) {
     const c = calculatePrice(p);
-    const text = `Hello Vicky Dresses, I am interested in ${p.name}${c.finalPrice != null ? ` (₹${c.finalPrice})` : ""}. Is it available?`;
-    return `https://wa.me/916201016171?text=${encodeURIComponent(text)}`;
+    const text = `Hello ${SHOP.name}, I am interested in ${p.name}${c.finalPrice != null ? ` (₹${c.finalPrice})` : ""}. Is it available?`;
+    return `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`;
   }
 
   function card(p, dark=false) {
@@ -62,17 +62,26 @@
   document.getElementById("latest-grid").innerHTML = featured.slice(0, 6).map(p => card(p)).join("");
   document.getElementById("products-grid").innerHTML = featured.map(p => card(p, true)).join("");
 
-  const specials = [
-    ["MONTHLY OFFER", "Selected Styles on Sale", "Discount badges are calculated from MRP or SP and shown directly over product photos."],
-    ["WHATSAPP", "Quick Enquiry", "Customers can ask about size, availability, price and current offers directly on WhatsApp."],
-    ["FRESH CATALOGUE", "New Arrivals", "Refresh product photos, prices and discounts each month without changing the layout."]
-  ];
+  const generalWa = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(`Hello ${SHOP.name}, please tell me about your current offers.`)}`;
 
   document.getElementById("offers-grid").innerHTML =
-    specials.map(x => `<article class="offer-card"><span>${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p><a href="https://wa.me/916201016171?text=Hello%20Vicky%20Dresses%2C%20please%20tell%20me%20about%20your%20current%20offers." target="_blank" rel="noopener">Ask on WhatsApp →</a></article>`).join("") +
+    SPECIAL_OFFERS.map(x => `<article class="offer-card"><span>${x.badge}</span><h3>${x.title}</h3><p>${x.text}</p><a href="${generalWa}" target="_blank" rel="noopener">Ask on WhatsApp →</a></article>`).join("") +
     offers.map(offerCard).join("");
 
   document.querySelectorAll("[data-shop-name]").forEach(e => e.textContent = SHOP.name);
   document.querySelectorAll("[data-shop-phone]").forEach(e => e.textContent = SHOP.displayPhone);
   document.querySelectorAll("[data-shop-location]").forEach(e => e.textContent = SHOP.location);
+
+  // Keep every WhatsApp link on the page pointed at SHOP.whatsapp, so the
+  // phone number only ever needs to be changed in one place (products.js).
+  document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
+    try {
+      const u = new URL(a.getAttribute("href"));
+      u.pathname = `/${SHOP.whatsapp}`;
+      a.setAttribute("href", u.toString());
+    } catch (e) { /* ignore malformed links */ }
+  });
+  document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+    a.setAttribute("href", `tel:${SHOP.whatsapp.replace(/^91/, "")}`);
+  });
 })();

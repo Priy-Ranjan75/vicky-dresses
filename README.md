@@ -90,6 +90,32 @@ offer: true
 
 Shows the product in Offers when a valid discount is present.
 
+## Shop info & phone number
+
+Edit the `SHOP` object at the top of `products.js`:
+
+```js
+const SHOP = {
+  name: "Vicky Dresses",
+  whatsapp: "916201016171",
+  displayPhone: "62010 16171",
+  location: "...",
+  hours: "..."
+};
+```
+
+Every WhatsApp and call link on the page reads from `SHOP.whatsapp` automatically —
+you never need to edit `index.html` to change the phone number.
+
+## Promo cards (Offers section)
+
+Edit `SPECIAL_OFFERS` in `products.js` to change the three general promo cards
+shown at the top of the Offers section (separate from per-product discount badges):
+
+```js
+{ badge:"MONTHLY OFFER", title:"...", text:"..." }
+```
+
 ## Monthly update
 
 For normal catalogue updates, edit only:
