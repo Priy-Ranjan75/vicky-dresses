@@ -31,11 +31,11 @@ const PRODUCTS = [
   { id:"kurta-maroon", name:"Maroon Kurta", category:"Ethnic Wear", image:"assets/kurta-maroon.jpg", mrp:1499, sellingPrice:1199, discountType:"mrp", discount:20, featured:true, offer:true },
   { id:"shirt-striped", name:"Classic Striped Shirt", category:"Shirts", image:"assets/shirt-striped.jpg", mrp:999, sellingPrice:999, discountType:null, discount:null, featured:true, offer:false },
   { id:"jeans", name:"Men's Denim Jeans", category:"Jeans", image:"assets/jeans.jpg", mrp:1599, sellingPrice:1299, discountType:"mrp", discount:19, featured:true, offer:true },
-  { id:"jockey", name:"Jockey Essentials", category:"Jockey", image:"assets/jockey.jpg", mrp:null, sellingPrice:null, discountType:null, discount:null, featured:true, offer:false },
+  { id:"jockey", name:"Jockey Essentials", category:"Jockey", image:"assets/jockey.jpg", mrp:399, sellingPrice:349, discountType:20, discount:null, featured:true, offer:false },
   { id:"fragrance", name:"Men's Fragrance", category:"Fragrances", image:"assets/fragrance.jpg", mrp:799, sellingPrice:699, discountType:"mrp", discount:13, featured:true, offer:true },
   { id:"footwear", name:"Men's Footwear", category:"Footwear", image:"assets/footwear.jpg", mrp:1799, sellingPrice:1499, discountType:"mrp", discount:17, featured:true, offer:true },
   { id:"watch", name:"Classic Chronograph Watch", category:"Accessories", image:"assets/watch.jpg", mrp:null, sellingPrice:1999, discountType:null, discount:null, featured:true, offer:false },
-  { id:"denim-stack", name:"Denim Collection", category:"Jeans", image:"assets/denim-stack.jpg", mrp:null, sellingPrice:null, discountType:"sp", discount:15, featured:true, offer:true },
+  { id:"denim-stack", name:"Denim Collection", category:"Jeans", image:"assets/denim-stack.jpg", mrp:1499, sellingPrice:null, discountType:"sp", discount:15, featured:true, offer:true },
   { id:"puma-tshirt", name:"Premium Sports T-Shirt", category:"T-Shirts", image:"assets/puma-tshirt.jpg", mrp:999, sellingPrice:899, discountType:"sp", discount:10, featured:true, offer:true }
 ];
 
