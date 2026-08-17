@@ -1,38 +1,46 @@
 /*
-  VICKY DRESSES - EASY CATALOGUE UPDATE FILE
-  ------------------------------------------------
-  Every 3-4 days, you only need to update this file.
-  Put the new photo inside /assets and change the image filename below.
+ VICKY DRESSES — MONTHLY CATALOGUE UPDATE FILE
+ ------------------------------------------------
+ For normal monthly updates, edit ONLY this file.
 
-  discount: set a number like 20 for 20% off, or null for no discount.
-  price / oldPrice are optional. Set them to null if you don't want to show prices.
-  featured: true puts the product in the main catalogue.
-  offer: true puts it in the Discounts & Offers section.
+ 1. Add the new photo to /assets
+ 2. Change image to that filename
+ 3. Update name/category/mrp/sellingPrice/discountType/discount
+ 4. Set featured:true to show in the main catalogue
+ 5. Set offer:true to show in the Offers section
+ 6. Commit to GitHub — GitHub Pages publishes automatically
+
+ IMPORTANT:
+ - discountType: "mrp" = discount is calculated from MRP.
+ - discountType: "sp" = discount is calculated from the normal selling price.
+ - discountType: null = no discount calculation.
+ - discount: 20 means 20% OFF and appears as a badge ON the product image.
+ - mrp/sellingPrice are optional where appropriate.
 */
 
 const SHOP = {
-  name: 'Vicky Dresses',
-  whatsapp: '916201016171',
-  displayPhone: '62010 16171',
-  location: 'Opposite to SBI Bank, Dhamdaha, Purnia, Bihar, India'
+  name: "Vicky Dresses",
+  whatsapp: "916201016171",
+  displayPhone: "62010 16171",
+  location: "Opposite to SBI Bank, Dhamdaha, Purnia, Bihar, India",
+  hours: "9:00 AM – 11:00 PM · Every day"
 };
 
 const PRODUCTS = [
-  { id:'shirt-01', name:'Casual Shirts', category:'Shirts', image:'assets/product-1.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'tee-01', name:'Premium T-Shirts', category:'T-Shirts', image:'assets/product-2.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'kurta-01', name:'Ethnic Kurta', category:'Ethnic Wear', image:'assets/product-3.png', price:null, oldPrice:null, discount:10, featured:true, offer:true },
-  { id:'jacket-01', name:'Smart Jackets', category:'Jackets', image:'assets/product-4.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'denim-01', name:'Denim Styles', category:'Jeans', image:'assets/product-5.png', price:null, oldPrice:null, discount:15, featured:true, offer:true },
-  { id:'party-01', name:'Party Wear', category:'Party Wear', image:'assets/product-6.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'shoes-01', name:'Men’s Footwear', category:'Footwear', image:'assets/product-7.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'belt-01', name:'Belts & Accessories', category:'Accessories', image:'assets/product-8.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'bag-01', name:'Bags', category:'Bags', image:'assets/product-9.png', price:null, oldPrice:null, discount:null, featured:true, offer:false },
-  { id:'trouser-01', name:'Trousers', category:'Trousers', image:'assets/product-10.png', price:null, oldPrice:null, discount:10, featured:true, offer:true },
-  { id:'jockey-01', name:'Jockey Essentials', category:'Jockey', image:'assets/product-11.png', price:null, oldPrice:null, discount:null, featured:true, offer:false }
+  { id:"shirt-black", name:"Premium Black Shirt", category:"Shirts", image:"assets/shirt-black.jpg", mrp:1099, sellingPrice:899, discountType:"mrp", discount:18, featured:true, offer:true },
+  { id:"kurta-maroon", name:"Maroon Kurta", category:"Ethnic Wear", image:"assets/kurta-maroon.jpg", mrp:1499, sellingPrice:1199, discountType:"mrp", discount:20, featured:true, offer:true },
+  { id:"shirt-striped", name:"Classic Striped Shirt", category:"Shirts", image:"assets/shirt-striped.jpg", mrp:999, sellingPrice:999, discountType:null, discount:null, featured:true, offer:false },
+  { id:"jeans", name:"Men's Denim Jeans", category:"Jeans", image:"assets/jeans.jpg", mrp:1599, sellingPrice:1299, discountType:"mrp", discount:19, featured:true, offer:true },
+  { id:"jockey", name:"Jockey Essentials", category:"Jockey", image:"assets/jockey.jpg", mrp:null, sellingPrice:null, discountType:null, discount:null, featured:true, offer:false },
+  { id:"fragrance", name:"Men's Fragrance", category:"Fragrances", image:"assets/fragrance.jpg", mrp:799, sellingPrice:699, discountType:"mrp", discount:13, featured:true, offer:true },
+  { id:"footwear", name:"Men's Footwear", category:"Footwear", image:"assets/footwear.jpg", mrp:1799, sellingPrice:1499, discountType:"mrp", discount:17, featured:true, offer:true },
+  { id:"watch", name:"Classic Chronograph Watch", category:"Accessories", image:"assets/watch.jpg", mrp:null, sellingPrice:1999, discountType:null, discount:null, featured:true, offer:false },
+  { id:"denim-stack", name:"Denim Collection", category:"Jeans", image:"assets/denim-stack.jpg", mrp:null, sellingPrice:null, discountType:"sp", discount:15, featured:true, offer:true },
+  { id:"puma-tshirt", name:"Premium Sports T-Shirt", category:"T-Shirts", image:"assets/puma-tshirt.jpg", mrp:999, sellingPrice:899, discountType:"sp", discount:10, featured:true, offer:true }
 ];
 
 const SPECIAL_OFFERS = [
-  { title:'Extra Savings', text:'Selected clothing styles are available with special discounts.', badge:'UP TO 15% OFF' },
-  { title:'Shop ₹2,000 & Get a Deo Free', text:'Free deodorant on purchases of ₹2,000 or more. Terms may apply.', badge:'FREE DEO' },
-  { title:'Shop ₹2,500 & Get a Deo Free', text:'Special free-deo offer on purchases of ₹2,500 or more. Ask in store for details.', badge:'FREE DEO' }
+  { badge:"MONTHLY OFFER", title:"Selected Styles on Sale", text:"Discounts are shown directly on the product image so customers can see the offer immediately." },
+  { badge:"WHATSAPP", title:"Quick Enquiry", text:"Customers can ask about size, availability, price and current offers directly on WhatsApp." },
+  { badge:"FRESH CATALOGUE", title:"New Arrivals", text:"The catalogue can be refreshed every month without changing the website layout." }
 ];
