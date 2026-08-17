@@ -1,164 +1,102 @@
-# Vicky Dresses — Sellable Static Catalogue Website
+# Vicky Dresses — Catalogue Update Guide
 
-This version was rebuilt after cross-checking the live GitHub Pages site and repository structure.
+## Product images
 
-## What was fixed
+Put new product images inside `assets/`.
 
-- Removed the visible filename text such as `product-1.jpg` from catalogue photos.
-- Replaced the broken/blank product assets with clean crops from the usable images already present in the original project.
-- Made product cards align consistently with a fixed image area and responsive grid.
-- Added a real discount badge **on top of the product image**.
-- Discount is controlled by `discount:` in `products.js`.
-- Price, old price and discount are separate data fields.
-- Mobile navigation is fixed and remains usable at smaller widths.
-- The Offers section no longer depends on the product image itself containing a discount.
-- Kept WhatsApp enquiry buttons for every product.
-- Normal monthly catalogue work can be done without editing `index.html`.
+Use clean images without filenames, prices, or discount text inside the image.
 
-
-## Pricing and discount rules
-
-The catalogue supports three discount modes:
-
-### 1. Discount on MRP
+Then set the filename in `products.js`:
 
 ```js
-{
-  mrp: 1500,
-  sellingPrice: 1200,
-  discountType: "mrp",
-  discount: 20
-}
+image: "assets/new-shirt.jpg"
 ```
 
-The website calculates **20% of ₹1,500 = ₹300**, so the customer sees **₹1,200**.
+## Product data
 
-### 2. Discount on Selling Price (SP)
+Edit `products.js`:
 
 ```js
 {
+  id: "shirt-new",
+  name: "New Casual Shirt",
+  category: "Shirts",
+  image: "assets/new-shirt.jpg",
   mrp: 1500,
   sellingPrice: 1200,
   discountType: "sp",
-  discount: 10
+  discount: 10,
+  featured: true,
+  offer: true
 }
 ```
 
-The website calculates **10% of ₹1,200 = ₹120**, so the customer sees **₹1,080**.
+## Discount types
 
-The image badge says **10% OFF SP**.
-
-### 3. No discount
+### Discount on MRP
 
 ```js
-{
-  mrp: 1500,
-  sellingPrice: 1500,
-  discountType: null,
-  discount: null
-}
+discountType: "mrp"
 ```
 
-The website shows **₹1,500** with no discount badge.
-
-### Important
-
-Use only these values:
-
-- `"mrp"` — discount calculated from MRP
-- `"sp"` — discount calculated from selling price
-- `null` — no discount
-
-The website calculates the final customer price automatically. You should not manually calculate the discounted amount.
-
-## Monthly update workflow
-
-For each monthly update:
-
-1. Put the new product photo into `assets/`.
-2. Open `products.js`.
-3. Add or edit one product object.
-4. Change `image:` to the new filename.
-5. Update `name`, `category`, `price`, `oldPrice`, `discount`.
-6. Set `featured:true` if it should appear in the catalogue.
-7. Set `offer:true` if it should also appear in the Offers section.
-8. Commit the changes to GitHub.
-9. GitHub Pages publishes the updated site.
-
-### Example
+Example:
 
 ```js
-{
-  id:"shirt-new",
-  name:"New Casual Shirt",
-  category:"Shirts",
-  image:"assets/shirt-new.jpg",
-  mrp:1500,
-  sellingPrice:1200,
-  discountType:"sp",
-  discount:10,
-  featured:true,
-  offer:true
-}
+mrp: 1500,
+sellingPrice: 1200,
+discountType: "mrp",
+discount: 20
 ```
 
-The customer will see:
+Final price: **₹1,200**
 
-**20% OFF** as a badge directly over the product photo.
+### Discount on Selling Price
 
-The actual photo stays clean. This is important because the shop can change the discount next month without editing the image.
+```js
+discountType: "sp"
+```
 
-## Important distinction
+Example:
 
-This is a static GitHub Pages website. It does **not** include a customer login/admin dashboard.
+```js
+mrp: 1500,
+sellingPrice: 1200,
+discountType: "sp",
+discount: 10
+```
 
-That is actually useful for a monthly update service:
+Final price: **₹1,080**
 
-- Client sends new photos + price/discount list.
-- You update `products.js` and `assets/`.
-- You commit/publish the update.
-- You can charge a monthly catalogue maintenance fee.
+### No discount
 
-If the client later wants to update products themselves from a browser, that should be sold as a separate upgrade because it requires a backend/admin system.
+```js
+discountType: null,
+discount: null
+```
 
-## Suggested service model
+No discount badge is shown.
 
-### Starter
-One-time website setup + deployment.
+## Visibility
 
-### Monthly Catalogue Care
-A fixed number of product photo/price/discount updates each month.
+```js
+featured: true
+```
 
-Suggested commercial structure in India:
+Shows the product in the main catalogue.
 
-- One-time setup: **₹4,999–₹9,999**
-- Monthly catalogue maintenance: **₹999–₹2,499/month**
-- Extra product beyond the monthly allowance: **₹50–₹150/product**
-- Larger redesign / new section: quote separately
-- Customer-managed admin panel: separate project, typically **₹8,000+** depending on backend and hosting
+```js
+offer: true
+```
 
-These are positioning suggestions, not mandatory market prices.
+Shows the product in Offers when a valid discount is present.
 
-## Deploy on GitHub Pages
+## Monthly update
 
-Upload the contents of this folder to the repository root.
+For normal catalogue updates, edit only:
 
-Then in GitHub:
+- `products.js`
+- `assets/`
 
-`Settings → Pages → Deploy from a branch → main → /(root)`
+Do not put discount text into the product image. The website creates the discount badge automatically.
 
-The website will publish from the repository.
-
-## Client handover
-
-For a paid client, give them:
-
-- Website URL
-- WhatsApp number configured in `products.js`
-- Monthly update plan
-- Number of catalogue updates included
-- Turnaround time
-- Extra-update price
-- What counts as a redesign versus a normal catalogue update
-
-Do not promise unlimited updates under a fixed monthly price.
+After saving, commit the changes to GitHub Pages.
